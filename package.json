@@ -1,0 +1,9 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "~4.13.4",
+    "bootstrap": "~3.3.6",
+    "angularjs": "0.0.1"
+  }
+}
