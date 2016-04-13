@@ -4,6 +4,8 @@
   "dependencies": {
     "express": "~4.13.4",
     "bootstrap": "~3.3.6",
-    "angular": "~1.5.3"
+    "angular": "~1.5.3",
+    "rootpath": "~0.1.2",
+    "ejs": "~2.4.1"
   }
 }
