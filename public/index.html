@@ -1,28 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="">
+<html lang="en">
 <head>
     <title>ToDo App List</title>
     <link rel="stylesheet" href="/styles/todoapp.css">
     <link rel="stylesheet" href="/modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/modules/bootstrap/dist/css/bootstrap-theme.min.css">
+    <script src="/modules/angular/angular.min.js"></script>
 </head>
-<body>
-    <div class="container col-md-3 main-page">
-        <h2>Register</h2>
-        <form method="post">
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" id="email" class="form-control" ng-model="vm.user.email" required />
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" class="form-control" ng-model="vm.user.password" />
-            </div>
-            <div class="form-group">
-                <button class="btn btn-primary" ng-click="vm.saveUser()">Register</button>
-                <button class="btn btn-default" ng-click="vm.deleteUser()">Cancel</button>
-            </div>
-        </form>
-    </div>
-</body>
+    <body ng-app>
+        <div class="container col-md-3 main-page">
+            <h2>Register</h2>
+            <form method="post">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" class="form-control" ng-model="user.email" required/>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" ng-model="user.password" required/>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" ng-click="vm.saveUser()">Register</button>
+                    <button class="btn btn-default" ng-click="vm.deleteUser()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </body>
 </html>
