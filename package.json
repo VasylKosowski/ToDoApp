@@ -6,6 +6,9 @@
     "bootstrap": "~3.3.6",
     "angular": "~1.5.3",
     "rootpath": "~0.1.2",
-    "ejs": "~2.4.1"
+    "ejs": "~2.4.1",
+    "config.json": "0.0.4",
+    "request": "~2.71.0",
+    "body-parser": "~1.15.0"
   }
 }

@@ -3,15 +3,19 @@
  */
 require('rootpath')();
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 
 app.use('/modules', express.static(__dirname + '/node_modules/'));
 app.use('/styles', express.static(__dirname + '/styles/'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
-
 app.set('views', __dirname + '/views');
+
+//register controllers
 app.use('/login', require('./controllers/login.controller'));
 app.use('/register', require('./controllers/register.controller'));
 
