@@ -11,6 +11,7 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function (req, res) {
+    console.log('post register');
     request.post({
         url: config.apiUrl + '/users/register',
         form: req.body,
