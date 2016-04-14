@@ -3,7 +3,6 @@
  */
 var express = require('express');
 var router = express();
-var config = require('config.json');
 var request = require('request');
 
 router.get('/', function (req, res) {
@@ -11,9 +10,8 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-    console.log('post register');
     request.post({
-        url: config.apiUrl + '/users/register',
+        url: req.protocol + "://" + req.headers.host + "/api/users/register",
         form: req.body,
         json: true
     }, function (error, response, body) {

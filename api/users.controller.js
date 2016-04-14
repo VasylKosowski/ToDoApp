@@ -25,7 +25,7 @@ function authenticateUser(req, res) {
         .catch(function (err) {
             res.status(400).send(err);
         });
-}
+};
 
 function registerUser(req, res) {
     userService.create(req.body)
@@ -35,4 +35,4 @@ function registerUser(req, res) {
         .catch(function (err) {
             res.status(400).send(err);
         });
-}
+};
