@@ -7,7 +7,7 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-    request.post({
+    /*request.post({
         url: req.protocol + "://" + req.headers.host + '/api/users/authenticate',
         form: req.body,
         json: true
@@ -21,7 +21,9 @@ router.post('/', function (req, res) {
         }
 
         res.redirect('items');
-    });
+    });*/
+
+    //res.redirect('items');
 });
 
 module.exports = router;

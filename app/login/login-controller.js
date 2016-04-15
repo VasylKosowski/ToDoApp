@@ -6,18 +6,22 @@
 
     var app = angular.module('app',[]);
 
-    app.controller('LoginController', ['$scope', '$http', function($scope, $http) {
+    app.controller('LoginController', ['$scope', '$http', '$window',
+        function($scope, $http, $window) {
         $scope.error = false;
-        
-        /*$http.get('/login').success(function(){
 
-        });*/
-
-        /*$http.post('/login', data).fail(function(res){
-            $scope.error = true;
-        });*/
-
+        $scope.login = function(){
+            $http.post('/api/users/authenticate', $scope.user)
+                .then(function(response) {
+                    if (response.status == 200){
+                        $scope.error = false;
+                        $window.location.href = response.data.redirectUrl;
+                    }
+                })
+                .catch(function(err){
+                    $scope.error = err.statusText;
+                });
+        };
     }]);
-
 })();
 

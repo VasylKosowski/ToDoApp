@@ -13,9 +13,9 @@ service.create = create;
 
 module.exports = service;
 
-function authenticate(username, password) {
+function authenticate(email, password) {
     var deferred = Q.defer();
-    usersDb.findOne({ username: username }, function (err, user) {
+    usersDb.findOne({ email: email }, function (err, user) {
         if (err) deferred.reject(err);
         if (user && crypt.compareSync(password, user.hash)) {
             // authentication successful

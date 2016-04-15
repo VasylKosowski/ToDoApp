@@ -14,17 +14,17 @@
     <div class="container main-page col-md-3 form-container" ng-controller="LoginController">
         <h2>Login</h2>
         <div ng-show="error" class="alert alert-danger">{{error}}</div>
-        <form method="post" action="/login">
+        <form ng-submit="login()">
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" class="form-control" required/>
+                <input type="email" ng-model="user.email" id="email" class="form-control" required/>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" class="form-control" required/>
+                <input type="password" ng-model="user.password" id="password" class="form-control" required/>
             </div>
             <div class="form-group">
-                <button type="submit" ng-click="" btn btn-primary">Login</button>
+                <input type="submit" value="Login" class="btn btn-primary"></input>
                 <a href="/register" class="btn btn-link">Register</a>
             </div>
         </form>

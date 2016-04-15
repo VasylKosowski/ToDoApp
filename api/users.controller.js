@@ -12,11 +12,11 @@ router.post('/register', registerUser);
 module.exports = router;
 
 function authenticateUser(req, res) {
-    userService.authenticate(req.body.username, req.body.password)
+    userService.authenticate(req.body.email, req.body.password)
         .then(function (token) {
             if (token) {
                 // authentication successful
-                res.send({ token: token });
+                res.send({ token: token, redirectUrl: req.protocol + "://" + req.headers.host + '/items' });
             } else {
                 // authentication failed
                 res.sendStatus(401);
