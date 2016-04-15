@@ -16,7 +16,7 @@ function authenticateUser(req, res) {
         .then(function (token) {
             if (token) {
                 // authentication successful
-                res.send({ token: token, redirectUrl: req.protocol + "://" + req.headers.host + '/items' });
+                res.send({ token: token});
             } else {
                 // authentication failed
                 res.sendStatus(401);

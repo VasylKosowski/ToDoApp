@@ -33,14 +33,13 @@ function create(userParam) {
     var deferred = Q.defer();
 
     usersDb.findOne(
-        { username: userParam.username },
+        { email: userParam.email },
         function (err, user) {
             if (err) deferred.reject(err);
 
             if (user) {
-                deferred.reject('Username "' + userParam.username + '" is already taken');
+                deferred.reject('Username "' + userParam.email + '" is already taken');
             } else {
-                console.log("create in register");
                 createUser(userParam, deferred);
             }
         });
@@ -54,8 +53,6 @@ function createUser(userParam, deferred) {
 
     // add hashed password to user object
     user.hash = crypt.hashSync(userParam.password, 10);
-
-    console.log("createUser in register");
     usersDb.insert(
         user,
         function (err, doc) {
