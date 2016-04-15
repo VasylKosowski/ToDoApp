@@ -21,6 +21,10 @@
                     $scope.error = err.statusText;
                 });
         };
+
+        $scope.getClientId = function(){
+            return "650851328603";
+        };
     }]);
 
 })();

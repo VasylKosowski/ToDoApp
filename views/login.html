@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="/styles/todoapp.css">
+    <link rel="stylesheet" href="/styles/google-plus-signin.css">
     <link rel="stylesheet" href="/modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/modules/bootstrap/dist/css/bootstrap-theme.min.css">
     <script src="/modules/angular/angular.min.js"></script>
     <script src="/app/login/login-controller.js"></script>
+    <script src="/app/login/google-plus-signin.js"></script>
 </head>
 
 <body ng-app="app">
@@ -26,6 +28,11 @@
             <div class="form-group">
                 <input type="submit" value="Login" class="btn btn-primary"/>
                 <a href="/register" class="btn btn-link">Register</a>
+            </div>
+            <div class="form-group">
+                <google-plus-signin clientid="getClientId()" autorender="false" customtargetid="my-custom-element">
+                    <div id="my-custom-element"><button>Sign In With Google</button></div>
+                </google-plus-signin>
             </div>
         </form>
     </div>
