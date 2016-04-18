@@ -47,13 +47,15 @@
                 <input type="submit" value="Login" class="btn btn-primary"/>
                 <a href="/register" class="btn btn-link">Register</a>
             </div>
-            <div class="form-group col-md-6">
-                <div class="g-signin2" data-width="auto" data-height="34px" data-onsuccess="onGoogleLogin"></div>
+            <div class="form-group col-md-8">
+                <div class="g-signin2" data-width="auto" data-height="39px"
+                     data-theme="dark"
+                     data-onsuccess="onGoogleLogin"></div>
             </div>
-            <div class="form-group col-md-6">
-                <div><fb:login-button show-faces="false" scope="email" max-rows="1" size="xlarge" onlogin="onFbLogin">
-
-                </fb:login-button></div>
+            <div class="form-group col-md-4">
+                <fb:login-button size="xlarge" scope="email" onlogin="onFbLogin">
+                    Sign In
+                </fb:login-button>
             </div>
         </form>
     </div>
