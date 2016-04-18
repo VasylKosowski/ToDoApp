@@ -12,7 +12,7 @@ router.post('/register', registerUser);
 module.exports = router;
 
 function authenticateUser(req, res) {
-    userService.authenticate(req.body.email, req.body.password)
+    userService.authenticate(req.body.email, req.body.password, req.body.passwordNotRequired)
         .then(function (token) {
             if (token) {
                 // authentication successful

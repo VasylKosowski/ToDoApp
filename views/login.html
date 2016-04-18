@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="google-signin-client_id" content="650851328603-6papse816s25nmqhg7tepj5p9oe2s9i8.apps.googleusercontent.com">
+    <meta name="google-signin-scope" content="profile email">
     <title>Login</title>
     <link rel="stylesheet" href="/styles/todoapp.css">
-    <link rel="stylesheet" href="/styles/google-plus-signin.css">
     <link rel="stylesheet" href="/modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/modules/bootstrap/dist/css/bootstrap-theme.min.css">
     <script src="/modules/angular/angular.min.js"></script>
     <script src="/app/login/login-controller.js"></script>
-    <script src="/app/login/google-plus-signin.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 
 <body ng-app="app">
@@ -30,9 +31,7 @@
                 <a href="/register" class="btn btn-link">Register</a>
             </div>
             <div class="form-group">
-                <google-plus-signin clientid="getClientId()" autorender="false" customtargetid="my-custom-element">
-                    <div id="my-custom-element"><button>Sign In With Google</button></div>
-                </google-plus-signin>
+                <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
             </div>
         </form>
     </div>
