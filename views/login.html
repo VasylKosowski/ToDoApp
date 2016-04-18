@@ -11,6 +11,23 @@
     <script src="/modules/angular/angular.min.js"></script>
     <script src="/app/login/login-controller.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="http://connect.facebook.net/en_US/all.js"></script>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '1715419558706580',
+                xfbml      : true,
+                version    : 'v2.6'
+            });
+        };
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 </head>
 
 <body ng-app="app">
@@ -30,8 +47,13 @@
                 <input type="submit" value="Login" class="btn btn-primary"/>
                 <a href="/register" class="btn btn-link">Register</a>
             </div>
-            <div class="form-group">
-                <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+            <div class="form-group col-md-6">
+                <div class="g-signin2" data-width="auto" data-height="34px" data-onsuccess="onGoogleLogin"></div>
+            </div>
+            <div class="form-group col-md-6">
+                <div><fb:login-button show-faces="false" scope="email" max-rows="1" size="xlarge" onlogin="onFbLogin">
+
+                </fb:login-button></div>
             </div>
         </form>
     </div>

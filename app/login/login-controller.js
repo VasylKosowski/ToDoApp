@@ -9,13 +9,21 @@
         function($scope, $window, $http, $location) {
         $scope.error = false;
         $scope.user = {};
-            
-        $scope.onSignIn = function(googleUser) {
+
+        $scope.onGoogleLogin = function(googleUser) {
              var profile = googleUser.getBasicProfile();
              if (profile != undefined){
                  var email = profile.getEmail();
                  $scope.loginUser(email);
              }
+        };
+
+        $scope.onFbLogin = function(response) {
+            if (response.status == 'connected') {
+                FB.api('/me', { locale: 'en_US', fields: 'name, email' }, function(userInfo) {
+                    $scope.loginUser(userInfo.email);
+                });
+            }
         };
 
         $scope.loginUser = function(email){
@@ -38,6 +46,7 @@
                 });
         };
 
-        window.onSignIn = $scope.onSignIn;
+        window.onGoogleLogin = $scope.onGoogleLogin;
+        window.onFbLogin = $scope.onFbLogin;
     }]);
 })();
