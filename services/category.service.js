@@ -3,7 +3,7 @@
  */
 var monk = require('monk');
 var db = monk("localhost:27017/todoapp");
-var categoriesDb = db.get('items');
+var categoriesDb = db.get('categories');
 var _ = require('lodash');
 var Q = require('q');
 
@@ -20,7 +20,7 @@ function create(categoryParam) {
             if (err) deferred.reject(err);
 
             if (user) {
-                deferred.reject('Category Name "' + categoryParam.email + '" is already taken');
+                deferred.reject('Category Name "' + categoryParam.name + '" is already taken');
             } else {
                 createCategory(categoryParam, deferred);
             }

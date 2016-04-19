@@ -8,6 +8,9 @@
         .controller('ItemsController', ['$scope', '$http',
             function($scope, $http) {
 
-            }]);
+                $scope.createCategory = function() {
+                    alert('Create Category');
+                };
 
+            }]);
 })();
