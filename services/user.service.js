@@ -10,13 +10,13 @@ var secretKey = "secret_key";
 var service = {};
 service.authenticate = authenticate;
 service.create = create;
-
 module.exports = service;
 
 function authenticate(email, password, passwordNotRequired) {
     var deferred = Q.defer();
     usersDb.findOne({ email: email }, function (err, user) {
         if (err) deferred.reject(err);
+        
         var passwordChecked = passwordNotRequired || crypt.compareSync(password, user.hash);
         if (user && passwordChecked) {
             deferred.resolve(jwt.sign({ sub: user._id }, secretKey));

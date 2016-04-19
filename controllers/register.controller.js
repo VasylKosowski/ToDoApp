@@ -3,7 +3,6 @@
  */
 var express = require('express');
 var router = express();
-var request = require('request');
 
 router.get('/', function (req, res) {
     res.render('register');
