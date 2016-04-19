@@ -20,7 +20,8 @@ app.set('views', __dirname + '/views');
 app.use('/login', require('./controllers/login.controller'));
 app.use('/register', require('./controllers/register.controller'));
 app.use('/items', require('./controllers/items.controller'));
-app.use('/api/users', require('./api/users.controller'));
+app.use('/api/users', require('./api/api.users.js'));
+app.use('/api/categories', require('./api/api.categories'));
 
 app.get('/', function (req, res) {
     return res.redirect('/login');

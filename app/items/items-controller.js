@@ -4,12 +4,21 @@
 (function () {
     'use strict';
 
-    var app = angular.module('app',[])
-        .controller('ItemsController', ['$scope', '$http',
-            function($scope, $http) {
+    app.controller('ItemsController', ['$scope', '$http', 'credService',
+            function($scope, $http, credService) {
+                $scope.category = {};
+                $scope.category.userEmail = credService.email;
 
                 $scope.createCategory = function() {
-                    alert('Create Category');
+                    $http.post('/api/categories/create', $scope.category)
+                        .then(function(response) {
+                            if (response.status == 200){
+                                $scope.error = false;
+                            }
+                        })
+                        .catch(function(err){
+                            $scope.error = err.statusText;
+                        });
                 };
 
             }]);
