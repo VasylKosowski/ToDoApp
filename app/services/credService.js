@@ -3,7 +3,15 @@
  */
 (function () {
     'use strict';
-        app.factory('credService', function() {
-            return { email : ''};
+        app.service('credService', function() {
+            var userEmail = {};
+            this.setEmail = function(value){
+                alert(value);
+                userEmail = value;
+            };
+            this.getEmail = function(){
+                alert(userEmail);
+                return userEmail;
+            };
         });
 })();

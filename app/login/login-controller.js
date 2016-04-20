@@ -3,7 +3,6 @@
  */
 (function () {
     'use strict';
-
     app.controller('LoginController', ['$scope', '$window', '$http', '$location', 'credService',
         function($scope, $window, $http, $location, credService) {
         $scope.error = false;
@@ -37,7 +36,7 @@
                 .then(function(response) {
                     if (response.status == 200){
                         $scope.error = false;
-                        credService.email = $scope.user.email;
+                        credService.setEmail($scope.user.email);
                         $window.location.href = $location.absUrl().split('/login')[0] + '/items';
                     }
                 })

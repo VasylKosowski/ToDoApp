@@ -7,7 +7,7 @@
     app.controller('ItemsController', ['$scope', '$http', 'credService',
             function($scope, $http, credService) {
                 $scope.category = {};
-                $scope.category.userEmail = credService.email;
+                $scope.category.userEmail = credService.getEmail();
 
                 $scope.createCategory = function() {
                     $http.post('/api/categories/create', $scope.category)
@@ -20,6 +20,5 @@
                             $scope.error = err.statusText;
                         });
                 };
-
             }]);
 })();
