@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="google-signin-client_id" content="650851328603-6papse816s25nmqhg7tepj5p9oe2s9i8.apps.googleusercontent.com">
-    <meta name="google-signin-scope" content="profile email">
     <title>Login Page</title>
     <link rel="stylesheet" href="/styles/todoapp.css">
     <link rel="stylesheet" href="/modules/bootstrap/dist/css/bootstrap.min.css">
@@ -17,9 +16,17 @@
     <script src="/app/login/login-controller.js"></script>
     <script src="/app/register/register-controller.js"></script>
     <script src="/app/items/items-controller.js"></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="http://connect.facebook.net/en_US/all.js"></script>
     <script>
+        function renderButton() {
+            gapi.signin2.render('signin2', {
+                'scope': 'profile email',
+                'width': 'auto',
+                'height': 25,
+                'theme': 'dark',
+                'onsuccess' : onGoogleLogin
+            });
+        }
         window.fbAsyncInit = function() {
             FB.init({
                 appId      : '1715419558706580',
@@ -35,6 +42,7 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 </head>
 
 <body ng-app="app">
