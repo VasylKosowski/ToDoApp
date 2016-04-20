@@ -9,22 +9,18 @@ var app = express();
 app.use('/modules', express.static(__dirname + '/node_modules/'));
 app.use('/styles', express.static(__dirname + '/styles/'));
 app.use('/app', express.static(__dirname + '/app/'));
+app.use('/views', express.static(__dirname + '/views/'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
-app.set('views', __dirname + '/views');
 
-//register controllers
-app.use('/login', require('./controllers/login.controller'));
-app.use('/register', require('./controllers/register.controller'));
-app.use('/items', require('./controllers/items.controller'));
 app.use('/api/users', require('./api/api.users.js'));
 app.use('/api/categories', require('./api/api.categories'));
 
 app.get('/', function (req, res) {
-    return res.redirect('/login');
+    res.render('index', 200);
 });
 
 app.listen(8081);

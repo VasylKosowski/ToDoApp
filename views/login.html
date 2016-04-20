@@ -1,65 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="google-signin-client_id" content="650851328603-6papse816s25nmqhg7tepj5p9oe2s9i8.apps.googleusercontent.com">
-    <meta name="google-signin-scope" content="profile email">
-    <title>Login</title>
-    <link rel="stylesheet" href="/styles/todoapp.css">
-    <link rel="stylesheet" href="/modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/modules/bootstrap/dist/css/bootstrap-theme.min.css">
-    <script src="/modules/angular/angular.min.js"></script>
-    <script src="/app/services/init.js"></script>
-    <script src="/app/services/credService.js"></script>
-    <script src="/app/login/login-controller.js"></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script src="http://connect.facebook.net/en_US/all.js"></script>
-    <script>
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId      : '1715419558706580',
-                xfbml      : true,
-                version    : 'v2.6'
-            });
-        };
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
-</head>
-
-<body ng-app="app">
-    <div class="container main-page col-md-3 form-container" ng-controller="LoginController">
-        <h2>Login</h2>
-        <div ng-show="error" class="alert alert-danger">{{error}}</div>
-        <form ng-submit="loginUser()">
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" ng-model="user.email" id="email" class="form-control" required/>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" ng-model="user.password" id="password" class="form-control" required/>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-primary"/>
-                <a href="/register" class="btn btn-link">Register</a>
-            </div>
-        </form>
-        <div class="form-group col-md-5">
-            <div class="g-signin2" data-width="auto" data-height="25px"
-                 data-theme="dark"
-                 data-onsuccess="onGoogleLogin"></div>
+<div class="container main-page col-md-3 form-container">
+    <h2>Login</h2>
+    <div ng-show="error" class="alert alert-danger">{{error}}</div>
+    <form ng-submit="loginUser()">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" ng-model="user.email" id="email" class="form-control" required/>
         </div>
-        <div class="form-group col-md-7">
-            <fb:login-button size="large" scope="email" onlogin="onFbLogin">
-                Facebook Sign in
-            </fb:login-button>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" ng-model="user.password" id="password" class="form-control" required/>
         </div>
+        <div class="form-group">
+            <input type="submit" value="Login" class="btn btn-primary"/>
+            <a href="#register" class="btn btn-link">Register</a>
+        </div>
+    </form>
+    <div class="form-group col-md-5">
+        <div class="g-signin2" data-width="auto" data-height="25px"
+             data-theme="dark" data-onsuccess="onGoogleLogin"></div>
     </div>
-</body>
-</html>
+    <div class="form-group col-md-7">
+        <fb:login-button size="large" scope="email" onlogin="onFbLogin">
+            Facebook Sign in
+        </fb:login-button>
+    </div>
+</div>
