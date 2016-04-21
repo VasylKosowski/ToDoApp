@@ -9,11 +9,27 @@ var Q = require('q');
 
 var service = {};
 service.create = create;
+service.getAllByEmail = getAllByEmail;
 module.exports = service;
+
+function getAllByEmail(categoryParam) {
+    var deferred = Q.defer();
+
+    categoriesDb.find(
+        { userEmail: categoryParam },
+        function (err, categories) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(categories);
+            }
+        });
+
+    return deferred.promise;
+};
 
 function create(categoryParam) {
     var deferred = Q.defer();
-
     categoriesDb.findOne(
         { name: categoryParam.name },
         function (err, user) {
