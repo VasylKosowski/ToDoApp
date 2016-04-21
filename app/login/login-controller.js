@@ -2,8 +2,8 @@
 * Created by test on 4/14/16.
 */
 'use strict';
-app.controller('LoginController', ['$scope', '$window', '$http', '$location', 'credService',
-    function($scope, $window, $http, $location, credService) {
+app.controller('LoginController', ['$scope', '$window', '$resource', '$location', 'credService',
+    function($scope, $window, $resource, $location, credService) {
     $scope.error = false;
     $scope.user = {};
 
@@ -31,17 +31,13 @@ app.controller('LoginController', ['$scope', '$window', '$http', '$location', 'c
             $scope.user.passwordNotRequired = false;
         }
 
-        $http.post('/api/users/authenticate', $scope.user)
-            .then(function(response) {
-                if (response.status == 200){
-                    $scope.error = false;
-                    credService.setEmail($scope.user.email);
-                    $location.path('/items');
-                }
-            })
-            .catch(function(err){
-                $scope.error = err.statusText;
-            });
+        $resource('/api/users/authenticate').save($scope.user, function() {
+            $scope.error = false;
+            credService.setEmail($scope.user.email);
+            $location.path('/items');
+        }, function(err) {
+            $scope.error = err.statusText;
+        });
     };
 
     window.onGoogleLogin = $scope.onGoogleLogin;
