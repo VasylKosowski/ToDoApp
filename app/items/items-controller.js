@@ -12,17 +12,34 @@ app.controller('ItemsController', ['$scope', '$resource', 'credService',
 
         $scope.createCategory = function() {
             $resource('/api/categories/create').save($scope.category, function(response) {
-                $scope.category = {};
+                $scope.category.name = "";
                 $scope.categories.push(response);
                 $('#categoryModal').modal('hide');
                 $scope.error = false;
             }, function(err){
+                $('#categoryModal').modal('hide');
                 $scope.error = err.statusText;
             });
         };
 
         $scope.deleteCategory = function() {
+            $resource('/api/categories')
+                .remove({ _id: $scope.categoryId}, function() {
+                    for (var i = 0; i < $scope.categories.length; i++) {
+                        if ($scope.categories[i]._id === $scope.categoryId) {
+                            $scope.categories.splice(i, 1);
+                            return;
+                        }
+                    }
+                },function(err){
+                    $('#categoryDeleteModal').modal('hide');
+                    $scope.error = err.statusText;
+                });
             $('#categoryDeleteModal').modal('hide');
+        };
+
+        $scope.deleteCategoryClick= function(id) {
+            $scope.categoryId = id;
         };
 
         $scope.getAllCategories = function() {

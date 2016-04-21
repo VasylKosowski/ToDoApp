@@ -1,5 +1,6 @@
 <div class="container main-page-items col-md-6 form-container">
     <div class="form-group col-md-12">
+        <div ng-show="error" class="alert alert-danger">{{error}}</div>
         <div class="col-md-10">
             <h2> Categories of: {{category.userEmails[0]}}</h2>
         </div>
@@ -22,7 +23,8 @@
                         <button class="btn btn-primary">
                             <i class="fa fa-pencil-square-o fa-fw" aria-hidden="true"> </i>
                         </button>
-                        <button class="btn btn-danger" data-toggle="modal" data-target="#categoryDeleteModal">
+                        <button ng-click="deleteCategoryClick(cat._id)"
+                                class="btn btn-danger" data-toggle="modal" data-target="#categoryDeleteModal">
                             <i class="fa fa-trash-o fa-fw" aria-hidden="true"></i>
                         </button>
                     </td>

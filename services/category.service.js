@@ -10,6 +10,7 @@ var Q = require('q');
 var service = {};
 service.create = create;
 service.getAllByEmail = getAllByEmail;
+service.delete = deleteCategory;
 module.exports = service;
 
 function getAllByEmail(categoryParam) {
@@ -50,4 +51,16 @@ function createCategory(userParam, deferred) {
             if (err) deferred.reject(err);
             deferred.resolve(cat);
         });
+};
+
+function deleteCategory(_id) {
+    var deferred = Q.defer();
+    categoriesDb.remove(
+        { _id: _id },
+        function (err) {
+            if (err) deferred.reject(err);
+            deferred.resolve();
+        });
+
+    return deferred.promise;
 };

@@ -7,12 +7,23 @@ var categoryService = require('services/category.service');
 
 router.post('/create', createCategory);
 router.get('/getAllByEmail', getCategories);
+router.delete('/', deleteCategory);
 
 function createCategory(req, res) {
     categoryService.create(req.body)
         .then(function (category) {
             res.contentType('application/json');
             res.status(200).send(category);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
+};
+
+function deleteCategory(req, res) {
+    categoryService.delete(req.query._id)
+        .then(function () {
+            res.sendStatus(200);
         })
         .catch(function (err) {
             res.status(400).send(err);
