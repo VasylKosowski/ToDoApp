@@ -26,8 +26,9 @@
                 'theme': 'dark',
                 'onsuccess' : onGoogleLogin
             });
-        }
-        window.fbAsyncInit = function() {
+        };
+
+        function fbAsyncInit() {
             FB.init({
                 appId      : '1715419558706580',
                 xfbml      : true,
@@ -42,7 +43,7 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
-    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 
 <body ng-app="app">

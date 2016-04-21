@@ -46,4 +46,8 @@ app.controller('LoginController', ['$scope', '$window', '$http', '$location', 'c
 
     window.onGoogleLogin = $scope.onGoogleLogin;
     window.onFbLogin = $scope.onFbLogin;
+
+    // render google and facebook sign in buttons
+    renderButton();
+    fbAsyncInit();
 }]);
