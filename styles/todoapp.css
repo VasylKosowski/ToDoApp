@@ -1,5 +1,9 @@
-.main-page {
+.main-page-login {
     float: right;
     top: 120px;
     left: 33%;
+}
+.main-page-items {
+    top: 80px;
+    left: 23%;
 }
