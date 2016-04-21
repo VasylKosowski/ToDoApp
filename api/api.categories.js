@@ -10,8 +10,9 @@ router.get('/getAllByEmail', getCategories);
 
 function createCategory(req, res) {
     categoryService.create(req.body)
-        .then(function () {
-            res.sendStatus(200);
+        .then(function (category) {
+            res.contentType('application/json');
+            res.status(200).send(category);
         })
         .catch(function (err) {
             res.status(400).send(err);

@@ -6,14 +6,15 @@
 app.controller('ItemsController', ['$scope', '$http', 'credService',
     function($scope, $http, credService) {
         $scope.category = {};
-        $scope.category.userEmail = credService.getEmail();
+        $scope.category.userEmails = [];
+        $scope.category.userEmails.push(credService.getEmail());
         $scope.categories = [];
 
         $scope.createCategory = function() {
             $http.post('/api/categories/create', $scope.category)
                 .then(function(response) {
                     if (response.status == 200){
-                        $scope.categories.push($scope.category);
+                        $scope.categories.push(response.data);
                         $('#categoryModal').modal('hide');
                         $scope.error = false;
                     }
@@ -25,7 +26,7 @@ app.controller('ItemsController', ['$scope', '$http', 'credService',
 
         $scope.getAllCategories = function() {
             var config = {
-                params: { email: $scope.category.userEmail},
+                params: { email: $scope.category.userEmails[0]},
                 headers : {'Accept' : 'application/json'}
             };
 

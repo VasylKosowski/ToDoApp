@@ -15,8 +15,7 @@ module.exports = service;
 function getAllByEmail(categoryParam) {
     var deferred = Q.defer();
 
-    categoriesDb.find(
-        { userEmail: categoryParam },
+    categoriesDb.find({ userEmails: categoryParam },
         function (err, categories) {
             if (err) {
                 deferred.reject(err);
@@ -32,10 +31,9 @@ function create(categoryParam) {
     var deferred = Q.defer();
     categoriesDb.findOne(
         { name: categoryParam.name },
-        function (err, user) {
+        function (err, categoryName) {
             if (err) deferred.reject(err);
-
-            if (user) {
+            if (categoryName) {
                 deferred.reject('Category Name "' + categoryParam.name + '" is already taken');
             } else {
                 createCategory(categoryParam, deferred);
@@ -47,10 +45,9 @@ function create(categoryParam) {
 
 function createCategory(userParam, deferred) {
     var category = _.omit(userParam);
-    categoriesDb.insert(
-        category,
-        function (err, doc) {
+    categoriesDb.insert(category,
+        function (err, cat) {
             if (err) deferred.reject(err);
-            deferred.resolve();
+            deferred.resolve(cat);
         });
 };
