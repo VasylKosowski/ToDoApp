@@ -10,19 +10,15 @@ app.controller('ItemsController', ['$scope', '$resource', 'credService',
         $scope.category.userEmails.push(credService.getEmail());
         $scope.categories = [];
 
-        $scope.createCategory = function(scope) {
+        $scope.createCategory = function() {
             $resource('/api/categories/create').save($scope.category, function(response) {
                 $scope.category = {};
-                scope.callbackAfterCreate(scope, response);
+                $scope.categories.push(response);
+                $('#categoryModal').modal('hide');
+                $scope.error = false;
             }, function(err){
                 $scope.error = err.statusText;
             });
-        };
-
-        $scope.callbackAfterCreate = function(scope, response) {
-            scope.categories.push(response);
-            $('#categoryModal').modal('hide');
-            scope.error = false;
         };
 
         $scope.deleteCategory = function() {
@@ -39,4 +35,15 @@ app.controller('ItemsController', ['$scope', '$resource', 'credService',
         };
 
         $scope.getAllCategories();
-}]);
+}])
+.directive('deleteCategory', function() {
+        return {
+            restrict: 'E',
+            templateUrl: '/views/modals/_deleteCategory.html'
+        }
+}).directive('createCategory', function() {
+    return {
+        restrict: 'E',
+        templateUrl: '/views/modals/_createCategory.html'
+    }
+});
