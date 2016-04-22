@@ -6,14 +6,16 @@ var db = monk("localhost:27017/todoapp");
 var categoriesDb = db.get('categories');
 var _ = require('lodash');
 var Q = require('q');
-var mongoDb = require('mongodb');
 
 var service = {};
-var ObjectId = mongoDb.ObjectID;
-service.create = createCategory;
+var ObjectId = require('mongodb').ObjectID;
+
 service.getAllByEmail = getAllByEmail;
-service.delete = deleteCategory;
+service.create = createCategory;
 service.update = updateCategory;
+service.delete = deleteCategory;
+service.share = shareCategory;
+
 module.exports = service;
 
 function getAllByEmail(categoryParam) {
@@ -98,5 +100,11 @@ function deleteCategory(_id) {
             deferred.resolve();
         });
 
+    return deferred.promise;
+};
+
+function shareCategory(userParam) {
+    var deferred = Q.defer();
+    deferred.resolve();
     return deferred.promise;
 };

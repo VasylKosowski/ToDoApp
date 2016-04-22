@@ -14,10 +14,10 @@ app.controller('ItemsController', ['$scope', '$resource', 'credService',
             $resource('/api/categories/create').save($scope.category, function(response) {
                 $scope.category.name = "";
                 $scope.categories.push(response);
-                $('#categoryModal').modal('hide');
+                $('#createCategoryModal').modal('hide');
                 $scope.error = false;
             }, function(err){
-                $('#categoryModal').modal('hide');
+                $('#createCategoryModal').modal('hide');
                 $scope.error = err.statusText;
             });
         };
@@ -47,10 +47,10 @@ app.controller('ItemsController', ['$scope', '$resource', 'credService',
                         }
                     }
                 },function(err){
-                    $('#categoryDeleteModal').modal('hide');
+                    $('#deleteCategoryModal').modal('hide');
                     $scope.error = err.statusText;
                 });
-            $('#categoryDeleteModal').modal('hide');
+            $('#deleteCategoryModal').modal('hide');
         };
 
         $scope.getAllCategories = function() {
@@ -58,7 +58,7 @@ app.controller('ItemsController', ['$scope', '$resource', 'credService',
                 .query({ email: $scope.category.userEmails[0]}, function(response) {
                     $scope.categories = $scope.categories.concat(response);
             },function(err){
-                        $scope.error = err.statusText;
+                $scope.error = err.statusText;
             });
         };
 
@@ -68,7 +68,13 @@ app.controller('ItemsController', ['$scope', '$resource', 'credService',
         };
 
         $scope.shareCategory = function() {
-            $('#categoryShareModal').modal('hide');
+            $resource('/api/categories/share').save($scope.category, function() {
+                $('#shareCategoryModal').modal('hide');
+                $scope.category.shareWith = "";
+            }, function(err){
+                $('#shareCategoryModal').modal('hide');
+                $scope.error = err.statusText;
+            });
         };
 
         $scope.getAllCategories();
