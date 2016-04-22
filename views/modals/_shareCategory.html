@@ -1,0 +1,28 @@
+<!-- Share Category Modal -->
+<div id="categoryShareModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content" style="max-width: 520px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Share Category</h4>
+            </div>
+            <form name="shareCategoryForm" role="form" novalidate ng-submit="shareCategory()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="required">Share with </label>
+                        <input type="text" class="form-control" placeholder="Enter Email" required
+                               ng-model="category.shareWith" autocomplete="off">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                    </button>
+                    <button type="submit" class="btn btn-success">
+                        <span class="glyphicon glyphicon-share"></span> Share
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

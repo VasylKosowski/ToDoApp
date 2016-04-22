@@ -22,12 +22,16 @@
                     <td>{{cat.name}}</td>
                     <td>
                         <button class="btn btn-primary" ng-click="categoryClick(cat._id, {name : cat.name})"
-                                data-toggle="modal" data-target="#updateCategoryModal">
+                                data-toggle="modal" data-target="#updateCategoryModal" title="Edit Category">
                             <i class="fa fa-pencil-square-o fa-fw" aria-hidden="true"> </i>
                         </button>
-                        <button ng-click="categoryClick(cat._id)"
+                        <button ng-click="categoryClick(cat._id)" title="Delete Category"
                                 class="btn btn-danger" data-toggle="modal" data-target="#categoryDeleteModal">
                             <i class="fa fa-trash-o fa-fw" aria-hidden="true"></i>
+                        </button>
+                        <button ng-click="categoryClick(cat._id)" title="Share Category"
+                                class="btn btn-success" data-toggle="modal" data-target="#categoryShareModal">
+                            <i class="fa fa-share fa-fw" aria-hidden="true"></i>
                         </button>
                     </td>
                 </tr>
@@ -38,3 +42,4 @@
 <create-category/>
 <update-category/>
 <delete-category/>
+<share-category/>

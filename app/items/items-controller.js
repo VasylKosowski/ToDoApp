@@ -53,11 +53,6 @@ app.controller('ItemsController', ['$scope', '$resource', 'credService',
             $('#categoryDeleteModal').modal('hide');
         };
 
-        $scope.categoryClick= function(id, params) {
-            if (id != undefined) $scope.category.id = id;
-            if (params != undefined) $scope.category.name = params.name;
-        };
-
         $scope.getAllCategories = function() {
             $resource('/api/categories/getAllByEmail')
                 .query({ email: $scope.category.userEmails[0]}, function(response) {
@@ -65,6 +60,15 @@ app.controller('ItemsController', ['$scope', '$resource', 'credService',
             },function(err){
                         $scope.error = err.statusText;
             });
+        };
+
+        $scope.categoryClick= function(id, params) {
+            if (id != undefined) $scope.category.id = id;
+            if (params != undefined) $scope.category.name = params.name;
+        };
+
+        $scope.shareCategory = function() {
+            $('#categoryShareModal').modal('hide');
         };
 
         $scope.getAllCategories();

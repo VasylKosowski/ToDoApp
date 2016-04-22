@@ -16,4 +16,9 @@ angular.module('app').directive('deleteCategory', function() {
         restrict: 'E',
         templateUrl: '/views/modals/_updateCategory.html'
     }
+}).directive('shareCategory', function() {
+    return {
+        restrict: 'E',
+        templateUrl: '/views/modals/_shareCategory.html'
+    }
 });
