@@ -103,8 +103,36 @@ function deleteCategory(_id) {
     return deferred.promise;
 };
 
-function shareCategory(userParam) {
+function shareCategory(categoryParam) {
     var deferred = Q.defer();
-    deferred.resolve();
+
+    categoriesDb.findOne(
+        { _id: ObjectId(categoryParam.id) },
+        function (err, category) {
+            if (err) deferred.reject(err);
+            if (category.userEmails.indexOf(categoryParam.shareWith) >= 0) {
+                deferred.reject('Category is already shared with ' + categoryParam.shareWith);
+            } else {
+                share(category.userEmails, categoryParam, deferred);
+            }
+        });
+
     return deferred.promise;
+};
+
+function share(userEmails, categoryParam, deferred) {
+    var emails = userEmails.concat(categoryParam.shareWith);
+    var set = {
+        userEmails: emails
+    };
+
+    categoriesDb.update(
+        { _id: ObjectId(categoryParam.id) },
+        { $set: set },
+        function (err) {
+            if (err) {
+                deferred.reject(err);
+            }
+            deferred.resolve();
+        });
 };

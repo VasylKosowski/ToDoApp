@@ -18,7 +18,7 @@ app.controller('ItemsController', ['$scope', '$resource', 'credService',
                 $scope.error = false;
             }, function(err){
                 $('#createCategoryModal').modal('hide');
-                $scope.error = err.statusText;
+                $scope.error = err.data;
             });
         };
 
@@ -33,7 +33,7 @@ app.controller('ItemsController', ['$scope', '$resource', 'credService',
                 }
             }, function(err){
                 $('#updateCategoryModal').modal('hide');
-                $scope.error = err.statusText;
+                $scope.error = err.data;
             });
         };
 
@@ -48,7 +48,7 @@ app.controller('ItemsController', ['$scope', '$resource', 'credService',
                     }
                 },function(err){
                     $('#deleteCategoryModal').modal('hide');
-                    $scope.error = err.statusText;
+                    $scope.error = err.data;
                 });
             $('#deleteCategoryModal').modal('hide');
         };
@@ -58,7 +58,7 @@ app.controller('ItemsController', ['$scope', '$resource', 'credService',
                 .query({ email: $scope.category.userEmails[0]}, function(response) {
                     $scope.categories = $scope.categories.concat(response);
             },function(err){
-                $scope.error = err.statusText;
+                $scope.error = err.data;
             });
         };
 
@@ -73,7 +73,8 @@ app.controller('ItemsController', ['$scope', '$resource', 'credService',
                 $scope.category.shareWith = "";
             }, function(err){
                 $('#shareCategoryModal').modal('hide');
-                $scope.error = err.statusText;
+                $scope.category.shareWith = "";
+                $scope.error = err.data;
             });
         };
 
