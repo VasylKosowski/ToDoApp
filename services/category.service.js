@@ -6,11 +6,14 @@ var db = monk("localhost:27017/todoapp");
 var categoriesDb = db.get('categories');
 var _ = require('lodash');
 var Q = require('q');
+var mongoDb = require('mongodb');
 
 var service = {};
-service.create = create;
+var ObjectId = mongoDb.ObjectID;
+service.create = createCategory;
 service.getAllByEmail = getAllByEmail;
 service.delete = deleteCategory;
+service.update = updateCategory;
 module.exports = service;
 
 function getAllByEmail(categoryParam) {
@@ -28,7 +31,7 @@ function getAllByEmail(categoryParam) {
     return deferred.promise;
 };
 
-function create(categoryParam) {
+function createCategory(categoryParam) {
     var deferred = Q.defer();
     categoriesDb.findOne(
         { name: categoryParam.name },
@@ -37,19 +40,52 @@ function create(categoryParam) {
             if (categoryName) {
                 deferred.reject('Category Name "' + categoryParam.name + '" is already taken');
             } else {
-                createCategory(categoryParam, deferred);
+                create(categoryParam, deferred);
             }
         });
 
     return deferred.promise;
 };
 
-function createCategory(userParam, deferred) {
+function create(userParam, deferred) {
     var category = _.omit(userParam);
     categoriesDb.insert(category,
         function (err, cat) {
             if (err) deferred.reject(err);
             deferred.resolve(cat);
+        });
+};
+
+function updateCategory(categoryParam) {
+    var deferred = Q.defer();
+
+    categoriesDb.findOne(
+        { _id: ObjectId(categoryParam.id) },
+        function (err, category) {
+            if (err) deferred.reject(err);
+            if (category.name == categoryParam.name) {
+                deferred.reject('Category Name "' + categoryParam.name + '" is already taken');
+            } else {
+                update(categoryParam, deferred);
+            }
+        });
+
+    return deferred.promise;
+};
+
+function update(userParam, deferred) {
+    var set = {
+        name: userParam.name
+    };
+
+    categoriesDb.update(
+        { _id: ObjectId(userParam.id) },
+        { $set: set },
+        function (err) {
+            if (err) {
+                deferred.reject(err);
+            }
+            deferred.resolve(userParam);
         });
 };
 

@@ -5,7 +5,8 @@
             <h2> Categories of: {{category.userEmails[0]}}</h2>
         </div>
         <div class="col-md-2">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#categoryModal">Create Category</button>
+            <button class="btn btn-primary" ng-click="categoryClick(null, {name : ''})"
+                    data-toggle="modal" data-target="#categoryModal">Create Category</button>
         </div>
     </div>
     <div class="form-group col-md-12">
@@ -20,10 +21,11 @@
                     <td>{{cat._id}}</td>
                     <td>{{cat.name}}</td>
                     <td>
-                        <button class="btn btn-primary">
+                        <button class="btn btn-primary" ng-click="categoryClick(cat._id, {name : cat.name})"
+                                data-toggle="modal" data-target="#updateCategoryModal">
                             <i class="fa fa-pencil-square-o fa-fw" aria-hidden="true"> </i>
                         </button>
-                        <button ng-click="deleteCategoryClick(cat._id)"
+                        <button ng-click="categoryClick(cat._id)"
                                 class="btn btn-danger" data-toggle="modal" data-target="#categoryDeleteModal">
                             <i class="fa fa-trash-o fa-fw" aria-hidden="true"></i>
                         </button>
@@ -34,4 +36,5 @@
     </div>
 </div>
 <create-category/>
+<update-category/>
 <delete-category/>

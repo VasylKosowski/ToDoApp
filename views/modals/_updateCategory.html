@@ -1,0 +1,28 @@
+<!-- Create Category Modal -->
+<div id="updateCategoryModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Update Category</h4>
+            </div>
+            <form name="addTileGroupgForm" role="form" novalidate ng-submit="updateCategory()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="required">Category Name</label>
+                        <input type="text" class="form-control" placeholder="Enter Category Name" required
+                               ng-model="category.name" autocomplete="off">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> Cancel
+                    </button>
+                    <button type="submit" class="btn btn-success">
+                        <span class="glyphicon glyphicon-ok"></span> Update
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

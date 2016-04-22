@@ -22,11 +22,26 @@ app.controller('ItemsController', ['$scope', '$resource', 'credService',
             });
         };
 
+        $scope.updateCategory = function() {
+            $resource('/api/categories/update').save($scope.category, function(response) {
+                $('#updateCategoryModal').modal('hide');
+                $scope.error = false;for (var i = 0; i < $scope.categories.length; i++) {
+                    if ($scope.categories[i]._id === response.id) {
+                        $scope.categories[i].name = response.name;
+                        return;
+                    }
+                }
+            }, function(err){
+                $('#updateCategoryModal').modal('hide');
+                $scope.error = err.statusText;
+            });
+        };
+
         $scope.deleteCategory = function() {
             $resource('/api/categories')
-                .remove({ _id: $scope.categoryId}, function() {
+                .remove({ _id: $scope.category.id}, function() {
                     for (var i = 0; i < $scope.categories.length; i++) {
-                        if ($scope.categories[i]._id === $scope.categoryId) {
+                        if ($scope.categories[i]._id === $scope.category.id) {
                             $scope.categories.splice(i, 1);
                             return;
                         }
@@ -38,8 +53,9 @@ app.controller('ItemsController', ['$scope', '$resource', 'credService',
             $('#categoryDeleteModal').modal('hide');
         };
 
-        $scope.deleteCategoryClick= function(id) {
-            $scope.categoryId = id;
+        $scope.categoryClick= function(id, params) {
+            if (id != undefined) $scope.category.id = id;
+            if (params != undefined) $scope.category.name = params.name;
         };
 
         $scope.getAllCategories = function() {
@@ -52,15 +68,4 @@ app.controller('ItemsController', ['$scope', '$resource', 'credService',
         };
 
         $scope.getAllCategories();
-}])
-.directive('deleteCategory', function() {
-        return {
-            restrict: 'E',
-            templateUrl: '/views/modals/_deleteCategory.html'
-        }
-}).directive('createCategory', function() {
-    return {
-        restrict: 'E',
-        templateUrl: '/views/modals/_createCategory.html'
-    }
-});
+}]);
